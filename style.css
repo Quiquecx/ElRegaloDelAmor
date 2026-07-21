@@ -1,0 +1,776 @@
+/* =============================================================
+   EL REGALO DEL AMOR - JUEGO
+   Estilos generales
+   ============================================================= */
+
+   :root {
+    /* Paleta de marca (serie ¡VIVE! · Casa del Catequista) */
+    --naranja: #E84E0F;
+    --naranja-claro: #FF7A3D;
+    --naranja-suave: #FFE3D3;
+  
+    --teal: #009394;
+    --teal-claro: #29B3B0;
+    --teal-suave: #DAF3F1;
+  
+    --morado: #59358C;
+    --morado-claro: #8B6BB8;
+    --morado-oscuro: #422B5A;
+    --morado-suave: #EAE1F5;
+  
+    --blanco: #FFFFFF;
+    --crema: #FFF9EF;
+    --celeste: #EAF4FB;
+    --gris-texto: #4A4458;
+  
+    --sombra: 0 8px 20px rgba(69, 50, 102, 0.25);
+    --sombra-suave: 0 12px 30px rgba(66, 43, 90, 0.14);
+    --radio: 24px;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Baloo 2', 'Comic Sans MS', sans-serif;
+    background: var(--celeste);
+    color: var(--gris-texto);
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  #app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+  
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
+  
+  /* =============================================================
+     PANTALLAS
+     ============================================================= */
+  
+  .screen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: auto;
+  }
+  
+  .screen.active {
+    display: block;
+  }
+  
+  /* =============================================================
+     PORTADA
+     Plantilla reutilizable para todos los juegos de la serie:
+     la estructura (fondo + tarjeta + título + imagen + botones)
+     se mantiene igual en cada juego; solo cambian las imágenes
+     (titulos.png, pag_16.png, logo_cruz.png) y los textos.
+     ============================================================= */
+  
+  .portada-bg {
+    width: 100%;
+    height: 100vh;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, var(--morado) 0%, var(--teal) 52%, var(--naranja) 100%);
+  }
+  
+  /* Manchas decorativas suaves para dar un aire lúdico al fondo,
+     sin depender de ninguna imagen (funciona igual en todos los
+     juegos de la serie). */
+  .portada-bg::before,
+  .portada-bg::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+  }
+  
+  .portada-bg::before {
+    width: 46vmax;
+    height: 46vmax;
+    top: -18vmax;
+    left: -14vmax;
+  }
+  
+  .portada-bg::after {
+    width: 38vmax;
+    height: 38vmax;
+    bottom: -16vmax;
+    right: -12vmax;
+    background: rgba(255, 255, 255, 0.10);
+  }
+  
+  .portada-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Tarjeta central: tamaño relativo al viewport, sin scroll interno */
+  .portada-card {
+    width: min(920px, 92vw);
+    height: min(720px, 86vh);
+    background: linear-gradient(180deg, var(--crema) 0%, var(--blanco) 100%);
+    border-radius: 28px;
+    padding: 30px 34px 20px;
+    box-shadow: 0 24px 50px rgba(20, 10, 40, 0.28);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    overflow: hidden;
+  }
+  
+  /* Franja decorativa superior con los 3 colores de marca */
+  .portada-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: linear-gradient(90deg, var(--morado) 0%, var(--teal) 50%, var(--naranja) 100%);
+  }
+  
+  /* Borde interior sutil */
+  .portada-card::after {
+    content: "";
+    position: absolute;
+    inset: 14px 10px 10px;
+    border-radius: 18px;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 3px rgba(89, 53, 140, 0.08);
+  }
+  
+  /* Título (imagen). Se controla por tamaño real, sin trucos de
+     "transform: scale" para que no se recorte en pantallas chicas. */
+  .titulo {
+    width: min(420px, 72%);
+    max-height: 22%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-top: 6px;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+  }
+  
+  /* Área central que ocupa el espacio disponible y contiene la imagen */
+  .portada-media {
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    min-height: 0;
+  }
+  
+  /* Imagen central: se ajusta siempre dentro del espacio disponible
+     sin distorsionarse, con un marco de color de marca. */
+  .portada-imagen {
+    max-width: 520px;
+    width: auto;
+    max-height: 100%;
+    height: auto;
+    border-radius: 16px;
+    border: 8px solid var(--blanco);
+    outline: 3px solid var(--teal-suave);
+    box-shadow: var(--sombra-suave);
+    background: var(--blanco);
+    display: block;
+    object-fit: contain;
+  }
+  
+  /* Botones: fijos en su espacio (no colapsan) */
+  .portada-botones {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  
+  /* Footer: fijo y compacto */
+  .portada-footer {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: 4px;
+    text-align: center;
+    color: var(--morado-claro);
+    opacity: 0.75;
+    font-size: 13px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(89, 53, 140, 0.12);
+    box-sizing: border-box;
+  }
+  
+  /* Logo pequeño en la esquina inferior derecha de la tarjeta */
+  .portada-logo-peq {
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    width: 40px;
+    height: auto;
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+  }
+  
+  /* Ajustes responsivos: la tarjeta se mantiene estática y se
+     escala completa para pantallas pequeñas (celular/tablet). */
+  @media (max-width: 920px) {
+    .portada-card {
+      width: 94vw;
+      height: min(640px, 86vh);
+      padding: 24px 20px 16px;
+    }
+    .portada-imagen { max-width: 420px; }
+  }
+  
+  @media (max-width: 540px) {
+    .portada-card {
+      width: 94vw;
+      height: min(620px, 88vh);
+      padding: 20px 16px 14px;
+      gap: 10px;
+    }
+    .titulo { width: 82%; max-height: 18%; }
+    .portada-imagen { max-width: 320px; border-width: 6px; border-radius: 12px; }
+    .btn-grande { font-size: 15px; padding: 10px 16px; }
+    .portada-footer { font-size: 11px; padding-top: 6px; }
+    .portada-logo-peq { width: 32px; right: 12px; bottom: 10px; }
+  }
+  
+  @media (max-height: 480px) and (orientation: landscape) {
+    .portada-card { height: 92vh; padding: 16px 20px 10px; gap: 6px; }
+    .titulo { width: 34%; max-height: 20%; }
+    .portada-imagen { max-height: 100%; }
+    .portada-footer { display: none; }
+  }
+  
+  /* =============================================================
+     BOTONES
+     ============================================================= */
+  
+  .btn {
+    font-weight: 700;
+    font-size: 18px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: var(--sombra);
+    color: var(--blanco);
+  }
+  
+  .btn:active {
+    transform: scale(0.94);
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, var(--naranja-claro), var(--naranja));
+    box-shadow: 0 12px 26px rgba(232, 78, 15, 0.30);
+  }
+  
+  .btn-secundario {
+    background: linear-gradient(135deg, var(--teal), var(--morado));
+    box-shadow: 0 12px 26px rgba(89, 53, 140, 0.28);
+  }
+  
+  .btn-grande {
+    font-size: 20px;
+    padding: 16px 34px;
+  }
+  
+  .btn-mini {
+    font-size: 14px;
+    padding: 10px 16px;
+    background: var(--blanco);
+    color: var(--morado);
+    box-shadow: 0 4px 10px rgba(69, 50, 102, 0.2);
+  }
+  
+  .btn-icon {
+    margin-right: 6px;
+  }
+  
+  /* =============================================================
+     PANELES CENTRADOS / TARJETAS (bienvenida, despedida, como jugar)
+     ============================================================= */
+  
+  .panel-centrado {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient(160deg, var(--naranja-suave) 0%, var(--celeste) 60%, var(--teal-suave) 100%);
+  }
+  
+  .fondo-nivel1 {
+    background: linear-gradient(160deg, var(--celeste) 0%, var(--teal-suave) 55%, var(--morado-suave) 100%);
+  }
+  
+  .fondo-nivel2 {
+    background: linear-gradient(160deg, var(--naranja-suave) 0%, #FFF3E4 55%, var(--celeste) 100%);
+  }
+  
+  .fondo-nivel3 {
+    background: linear-gradient(160deg, var(--teal-suave) 0%, var(--celeste) 55%, var(--morado-suave) 100%);
+  }
+  
+  .fondo-final {
+    background: linear-gradient(160deg, var(--morado-suave) 0%, var(--naranja-suave) 50%, var(--teal-suave) 100%);
+  }
+  
+  .tarjeta {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 32px 28px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .tarjeta-logo {
+    width: 56px;
+    margin-bottom: 8px;
+  }
+  
+  .titulo-morado {
+    color: var(--morado);
+    font-weight: 800;
+    font-size: 28px;
+    margin: 6px 0 16px;
+  }
+  
+  .emoji-grande {
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  
+  .texto-mensaje {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--gris-texto);
+    margin-bottom: 24px;
+  }
+  
+  .instruccion-bloque {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-align: left;
+    background: var(--celeste);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  
+  .instruccion-bloque h3 {
+    margin: 0 0 4px;
+    color: var(--morado);
+    font-size: 17px;
+  }
+  
+  .instruccion-bloque p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  
+  .instruccion-icono {
+    font-size: 30px;
+    flex-shrink: 0;
+  }
+  
+  .nota-adulto {
+    font-size: 13px;
+    color: #8a8397;
+    margin: 12px 0 20px;
+  }
+  
+  /* =============================================================
+     CONTENEDOR DE JUEGO (niveles)
+     ============================================================= */
+  
+  .juego-contenedor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(160deg, var(--celeste) 0%, var(--naranja-suave) 100%);
+    padding: 14px;
+    gap: 10px;
+  }
+  
+  .juego-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .etiqueta-nivel {
+    background: var(--morado);
+    color: var(--blanco);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 999px;
+  }
+  
+  .etiqueta-progreso {
+    background: var(--teal);
+    color: var(--blanco);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 999px;
+  }
+  
+  .header-botones {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* =============================================================
+     NIVEL 1 - ROMPECABEZAS
+     ============================================================= */
+  
+  .puzzle-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    align-items: center;
+  }
+  
+  .puzzle-board-wrap {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  
+  .puzzle-board {
+    position: relative;
+    /* El tamaño exacto (width/height en px) se calcula por JS
+       para conservar siempre la proporción 936x681 sin distorsión,
+       sin importar el tamaño de pantalla (celular, tablet, PC). */
+    background: var(--blanco);
+    border-radius: 18px;
+    border: 4px dashed var(--morado-claro);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .puzzle-guia {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+  
+  .puzzle-pieza-colocada {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .puzzle-tray {
+    width: 100%;
+    max-width: 936px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    min-height: 90px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .puzzle-pieza {
+    touch-action: none;
+    width: 120px;
+    aspect-ratio: 936 / 681;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    cursor: grab;
+    transition: transform 0.12s ease;
+  }
+  
+  .puzzle-pieza img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  
+  .puzzle-pieza.arrastrando {
+    position: fixed;
+    z-index: 999;
+    cursor: grabbing;
+    filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+  }
+  
+  .overlay-completado {
+    position: absolute;
+    inset: 0;
+    background: rgba(66, 43, 90, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 50;
+  }
+  
+  .overlay-completado.oculto {
+    display: none;
+  }
+  
+  /* =============================================================
+     NIVEL 2 - COLOREAR
+     ============================================================= */
+  
+  .color-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    align-items: center;
+  }
+  
+  .lienzo-wrap {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #color-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 936 / 681;
+    background: var(--blanco);
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+    touch-action: none;
+    cursor: crosshair;
+  }
+  
+  .paleta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    flex-shrink: 0;
+  }
+  
+  .color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--blanco);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.12s ease;
+  }
+  
+  .color-swatch:active {
+    transform: scale(0.9);
+  }
+  
+  .color-swatch.seleccionado {
+    border-color: var(--morado);
+    transform: scale(1.15);
+  }
+  
+  /* =============================================================
+     NIVEL 3 - ¿CUAL NO PERTENECE?
+     ============================================================= */
+  
+  .n3-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 0;
+  }
+  
+  .n3-instruccion {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--morado);
+    text-align: center;
+    margin: 0;
+  }
+  
+  .n3-tablero {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    max-width: 100%;
+  }
+  
+  .n3-tarjeta {
+    background: var(--blanco);
+    border: 5px solid transparent;
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: var(--sombra);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    width: min(30vw, 230px);
+    flex-shrink: 0;
+  }
+  
+  .n3-tarjeta img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    pointer-events: none;
+  }
+  
+  .n3-tarjeta:active {
+    transform: scale(0.96);
+  }
+  
+  .n3-tarjeta.n3-correcta {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(0, 147, 148, 0.25), var(--sombra);
+  }
+  
+  .n3-tarjeta.n3-incorrecta {
+    border-color: var(--naranja);
+    animation: sacudir 0.4s ease;
+  }
+  
+  @keyframes sacudir {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  
+  /* =============================================================
+     CONFETI (celebracion simple)
+     ============================================================= */
+  
+  .confeti {
+    position: fixed;
+    top: -20px;
+    font-size: 22px;
+    animation: caer 2.2s linear forwards;
+    z-index: 999;
+    pointer-events: none;
+  }
+  
+  @keyframes caer {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0.3;
+    }
+  }
+  
+  /* =============================================================
+     RESPONSIVE
+     ============================================================= */
+  
+  @media (max-width: 600px) {
+    .titulo-morado { font-size: 22px; }
+    .texto-mensaje { font-size: 16px; }
+    .tarjeta { padding: 24px 18px; }
+    .btn-grande { font-size: 17px; padding: 14px 24px; }
+    .puzzle-pieza { width: 78px; }
+    .color-swatch { width: 34px; height: 34px; }
+    .n3-tarjeta { width: 28vw; padding: 6px; }
+    .n3-instruccion { font-size: 17px; }
+    .etiqueta-nivel, .etiqueta-progreso { font-size: 13px; padding: 7px 12px; }
+    .btn-mini { font-size: 13px; padding: 9px 13px; }
+  }
+  
+  /* Pantallas muy angostas (celulares pequeños en vertical) */
+  @media (max-width: 380px) {
+    .puzzle-pieza { width: 64px; }
+    .n3-tarjeta { width: 27vw; }
+  }
+  
+  /* Tablets / celulares en horizontal: priorizar altura disponible */
+  @media (max-height: 480px) and (orientation: landscape) {
+    .juego-contenedor { padding: 8px; gap: 6px; }
+    .puzzle-tray { min-height: 70px; padding: 6px; }
+    .puzzle-pieza { width: 70px; }
+    .paleta { padding: 6px; }
+    .color-swatch { width: 30px; height: 30px; }
+    .n3-tarjeta { width: 22vw; }
+    .tarjeta { padding: 18px 16px; }
+    .emoji-grande { font-size: 40px; }
+    .titulo-morado { font-size: 20px; margin: 4px 0 10px; }
+    .texto-mensaje { font-size: 15px; margin-bottom: 16px; }
+  }

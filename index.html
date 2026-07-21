@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>El regalo del amor - Juego</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== PANTALLA: PORTADA ===================== -->
+  <section id="screen-portada" class="screen active">
+    <div class="portada-bg"> <!-- background quitado de inline -->
+      <div class="portada-overlay">
+        <!-- tarjeta central que espera el CSS -->
+        <div class="portada-card">
+          <!-- título como imagen -->
+          <img class="titulo" src="src/imgs/portada/titulos.png" alt="Título">
+
+          <!-- imagen central -->
+          <div class="portada-media">
+            <img class="portada-imagen" src="src/imgs/portada/pag_16.png" alt="Imagen central">
+          </div>
+
+          <!-- botones dentro de la tarjeta -->
+          <div class="portada-botones">
+            <button class="btn btn-primary btn-grande" id="btn-jugar">
+              <span class="btn-icon">▶</span> ¡JUGAR!
+            </button>
+            <button class="btn btn-secundario btn-grande" id="btn-como-jugar">
+              <span class="btn-icon">❓</span> ¿CÓMO JUGAR?
+            </button>
+          </div>
+
+          <!-- footer pequeño dentro de la tarjeta -->
+          <div class="portada-footer">
+            © Todos los derechos reservados Casa del Catequista
+          </div>
+
+          <!-- logo pequeño en esquina (opcional) -->
+          <img class="portada-logo-peq" src="src/imgs/portada/logo_cruz.png" alt="logo pequeño">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===================== PANTALLA: COMO JUGAR ===================== -->
+  <section id="screen-como-jugar" class="screen">
+    <div class="panel-centrado">
+      <div class="tarjeta">
+        <img class="tarjeta-logo" src="src/imgs/portada/logo_cruz.png" alt="Logo">
+        <h1 class="titulo-morado">¿Cómo se juega?</h1>
+
+        <div class="instruccion-bloque">
+          <div class="instruccion-icono">🧩</div>
+          <div>
+            <h3>Nivel 1 · Rompecabezas</h3>
+            <p>Arrastra cada pieza y suéltala sobre el tablero para armar la imagen completa.</p>
+          </div>
+        </div>
+
+        <div class="instruccion-bloque">
+          <div class="instruccion-icono">🎨</div>
+          <div>
+            <h3>Nivel 2 · A colorear</h3>
+            <p>Elige un color de la paleta y toca el dibujo para pintarlo. ¡Usa tu imaginación!</p>
+          </div>
+        </div>
+
+        <div class="instruccion-bloque">
+          <div class="instruccion-icono">🔍</div>
+          <div>
+            <h3>Nivel 3 · ¿Cuál no pertenece?</h3>
+            <p>De las 3 imágenes, toca la que sea diferente a las otras dos.</p>
+          </div>
+        </div>
+
+        <p class="nota-adulto">Un adulto puede acompañar al niño o niña durante el juego. ¡Que se diviertan!</p>
+
+        <button class="btn btn-primary" id="btn-volver-portada">Volver</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: BIENVENIDA NIVEL 1 ===================== -->
+  <section id="screen-nivel1-intro" class="screen">
+    <div class="panel-centrado fondo-nivel1">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">👋</div>
+        <h1 class="titulo-morado">¡Bienvenido al Nivel 1!</h1>
+        <p class="texto-mensaje">Dios nos regaló personas maravillosas para amar y cuidar. Arma los rompecabezas y descubre escenas llenas de cariño.</p>
+        <button class="btn btn-primary btn-grande" id="btn-empezar-nivel1">Comenzar 🧩</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: JUEGO NIVEL 1 ===================== -->
+  <section id="screen-nivel1-game" class="screen">
+    <div class="juego-contenedor">
+      <div class="juego-header">
+        <span class="etiqueta-nivel">Nivel 1 · Rompecabezas</span>
+        <span class="etiqueta-progreso" id="n1-progreso">Piezas: 0/6</span>
+      </div>
+
+      <div class="puzzle-area">
+        <div class="puzzle-board-wrap" id="puzzle-board-wrap">
+          <div class="puzzle-board" id="puzzle-board">
+            <img class="puzzle-guia" id="puzzle-guia" src="" alt="">
+          </div>
+        </div>
+        <div class="puzzle-tray" id="puzzle-tray"></div>
+      </div>
+    </div>
+
+    <!-- overlay al completar cada rompecabezas -->
+    <div class="overlay-completado oculto" id="n1-overlay-completado">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">🎉</div>
+        <h2 class="titulo-morado" id="n1-overlay-titulo">¡Muy bien!</h2>
+        <p class="texto-mensaje" id="n1-overlay-texto">Completaste el rompecabezas.</p>
+        <button class="btn btn-primary btn-grande" id="btn-n1-siguiente">Siguiente ➡️</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: DESPEDIDA NIVEL 1 ===================== -->
+  <section id="screen-nivel1-outro" class="screen">
+    <div class="panel-centrado fondo-nivel1">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">🌟</div>
+        <h1 class="titulo-morado">¡Lo lograste!</h1>
+        <p class="texto-mensaje">Completaste el Nivel 1. Recuerda que el amor se comparte con las personas que nos rodean.</p>
+        <button class="btn btn-primary btn-grande" id="btn-ir-nivel2">Ir al Nivel 2 🎨</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: BIENVENIDA NIVEL 2 ===================== -->
+  <section id="screen-nivel2-intro" class="screen">
+    <div class="panel-centrado fondo-nivel2">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">👋</div>
+        <h1 class="titulo-morado">¡Bienvenido al Nivel 2!</h1>
+        <p class="texto-mensaje">Ahora vas a colorear escenas llenas de cariño y amistad. Elige tus colores favoritos y deja volar tu imaginación.</p>
+        <button class="btn btn-primary btn-grande" id="btn-empezar-nivel2">Comenzar 🎨</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: JUEGO NIVEL 2 ===================== -->
+  <section id="screen-nivel2-game" class="screen">
+    <div class="juego-contenedor">
+      <div class="juego-header">
+        <span class="etiqueta-nivel">Nivel 2 · A colorear</span>
+        <div class="header-botones">
+          <button class="btn btn-mini" id="btn-n2-borrar">🧹 Borrar</button>
+          <button class="btn btn-mini btn-primary" id="btn-n2-enviar">Enviar ✅</button>
+        </div>
+      </div>
+
+      <div class="color-area">
+        <div class="lienzo-wrap">
+          <canvas id="color-canvas" width="936" height="681"></canvas>
+        </div>
+        <div class="paleta" id="paleta-colores"></div>
+      </div>
+    </div>
+
+    <!-- overlay al enviar cada dibujo -->
+    <div class="overlay-completado oculto" id="n2-overlay-completado">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">🎨</div>
+        <h2 class="titulo-morado">¡Qué bonito quedó!</h2>
+        <p class="texto-mensaje" id="n2-overlay-texto"></p>
+        <button class="btn btn-primary btn-grande" id="btn-n2-siguiente">Siguiente ➡️</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: DESPEDIDA NIVEL 2 ===================== -->
+  <section id="screen-nivel2-outro" class="screen">
+    <div class="panel-centrado fondo-nivel2">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">🌈</div>
+        <h1 class="titulo-morado">¡Felicidades!</h1>
+        <p class="texto-mensaje">Ahora ya sabes cómo amar a los demás.</p>
+        <button class="btn btn-primary btn-grande" id="btn-ir-nivel3">Ir al Nivel 3 🔍</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: BIENVENIDA NIVEL 3 ===================== -->
+  <section id="screen-nivel3-intro" class="screen">
+    <div class="panel-centrado fondo-nivel3">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">👋</div>
+        <h1 class="titulo-morado">¡Bienvenido al Nivel 3!</h1>
+        <p class="texto-mensaje">Vas a ver 3 imágenes. Toca la que sea diferente a las otras dos. Escucha con atención.</p>
+        <button class="btn btn-primary btn-grande" id="btn-empezar-nivel3">Comenzar 🔍</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: JUEGO NIVEL 3 ===================== -->
+  <section id="screen-nivel3-game" class="screen">
+    <div class="juego-contenedor">
+      <div class="juego-header">
+        <span class="etiqueta-nivel">Nivel 3 · ¿Cuál no pertenece?</span>
+        <span class="etiqueta-progreso" id="n3-progreso">Grupo 1/5</span>
+      </div>
+
+      <div class="n3-area">
+        <p class="n3-instruccion">Toca la imagen diferente</p>
+        <div class="n3-tablero" id="n3-tablero"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANTALLA: FINAL DEL JUEGO ===================== -->
+  <section id="screen-final" class="screen">
+    <div class="panel-centrado fondo-final">
+      <div class="tarjeta tarjeta-mensaje">
+        <div class="emoji-grande">🎉🌟</div>
+        <h1 class="titulo-morado">¡Felicidades!</h1>
+        <p class="texto-mensaje">Terminaste "El regalo del amor". Gracias por jugar y recuerda compartir amor con todos los que te rodean.</p>
+        <button class="btn btn-primary btn-grande" id="btn-volver-inicio">Volver al inicio 🏠</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="src/bloques/audio.js"></script>
+<script src="src/bloques/nivel1.js"></script>
+<script src="src/bloques/nivel2.js"></script>
+<script src="src/bloques/nivel3.js"></script>
+<script src="src/main.js"></script>
+</body>
+</html>
