@@ -80,7 +80,7 @@
     display: block;
   }
   
-  /* =============================================================
+/* =============================================================
      PORTADA
      Plantilla reutilizable para todos los juegos de la serie:
      la estructura (fondo + tarjeta + título + imagen + botones)
@@ -88,201 +88,201 @@
      (titulos.png, pag_16.png, logo_cruz.png) y los textos.
      ============================================================= */
   
-  .portada-bg {
-    width: 100%;
-    height: 100vh;
-    min-height: 100%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 28px;
-    box-sizing: border-box;
-    background: linear-gradient(135deg, var(--morado) 0%, var(--teal) 52%, var(--naranja) 100%);
-  }
-  
-  /* Manchas decorativas suaves para dar un aire lúdico al fondo,
-     sin depender de ninguna imagen (funciona igual en todos los
-     juegos de la serie). */
-  .portada-bg::before,
-  .portada-bg::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.14);
-    pointer-events: none;
-  }
-  
-  .portada-bg::before {
-    width: 46vmax;
-    height: 46vmax;
-    top: -18vmax;
-    left: -14vmax;
-  }
-  
-  .portada-bg::after {
-    width: 38vmax;
-    height: 38vmax;
-    bottom: -16vmax;
-    right: -12vmax;
-    background: rgba(255, 255, 255, 0.10);
-  }
-  
-  .portada-overlay {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  /* Tarjeta central: tamaño relativo al viewport, sin scroll interno */
-  .portada-card {
-    width: min(920px, 92vw);
-    height: min(720px, 86vh);
-    background: linear-gradient(180deg, var(--crema) 0%, var(--blanco) 100%);
-    border-radius: 28px;
-    padding: 30px 34px 20px;
-    box-shadow: 0 24px 50px rgba(20, 10, 40, 0.28);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    overflow: hidden;
-  }
-  
-  /* Franja decorativa superior con los 3 colores de marca */
-  .portada-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 12px;
-    background: linear-gradient(90deg, var(--morado) 0%, var(--teal) 50%, var(--naranja) 100%);
-  }
-  
-  /* Borde interior sutil */
-  .portada-card::after {
-    content: "";
-    position: absolute;
-    inset: 14px 10px 10px;
-    border-radius: 18px;
-    pointer-events: none;
-    box-shadow: inset 0 0 0 3px rgba(89, 53, 140, 0.08);
-  }
-  
-  /* Título (imagen). Se controla por tamaño real, sin trucos de
-     "transform: scale" para que no se recorte en pantallas chicas. */
-  .titulo {
-    width: min(420px, 72%);
-    max-height: 22%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin-top: 6px;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
-  }
-  
-  /* Área central que ocupa el espacio disponible y contiene la imagen */
-  .portada-media {
-    flex: 1 1 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 8px;
-    box-sizing: border-box;
-    min-height: 0;
-  }
-  
-  /* Imagen central: se ajusta siempre dentro del espacio disponible
-     sin distorsionarse, con un marco de color de marca. */
-  .portada-imagen {
-    max-width: 520px;
-    width: auto;
-    max-height: 100%;
-    height: auto;
-    border-radius: 16px;
-    border: 8px solid var(--blanco);
-    outline: 3px solid var(--teal-suave);
-    box-shadow: var(--sombra-suave);
-    background: var(--blanco);
-    display: block;
-    object-fit: contain;
-  }
-  
-  /* Botones: fijos en su espacio (no colapsan) */
-  .portada-botones {
-    flex: 0 0 auto;
-    display: flex;
-    gap: 18px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-  
-  /* Footer: fijo y compacto */
-  .portada-footer {
-    flex: 0 0 auto;
-    width: 100%;
-    margin-top: 4px;
-    text-align: center;
-    color: var(--morado-claro);
-    opacity: 0.75;
-    font-size: 13px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(89, 53, 140, 0.12);
-    box-sizing: border-box;
-  }
-  
-  /* Logo pequeño en la esquina inferior derecha de la tarjeta */
-  .portada-logo-peq {
-    position: absolute;
-    right: 18px;
-    bottom: 14px;
-    width: 40px;
-    height: auto;
-    opacity: 0.95;
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
-  }
-  
-  /* Ajustes responsivos: la tarjeta se mantiene estática y se
-     escala completa para pantallas pequeñas (celular/tablet). */
-  @media (max-width: 920px) {
-    .portada-card {
-      width: 94vw;
-      height: min(640px, 86vh);
-      padding: 24px 20px 16px;
+     .portada-bg {
+      width: 100%;
+      height: 100vh;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      box-sizing: border-box;
+      background: linear-gradient(135deg, var(--morado) 0%, var(--teal) 52%, var(--naranja) 100%);
     }
-    .portada-imagen { max-width: 420px; }
-  }
-  
-  @media (max-width: 540px) {
-    .portada-card {
-      width: 94vw;
-      height: min(620px, 88vh);
-      padding: 20px 16px 14px;
-      gap: 10px;
+    
+    /* Manchas decorativas suaves para dar un aire lúdico al fondo,
+       sin depender de ninguna imagen (funciona igual en todos los
+       juegos de la serie). */
+    .portada-bg::before,
+    .portada-bg::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      pointer-events: none;
     }
-    .titulo { width: 82%; max-height: 18%; }
-    .portada-imagen { max-width: 320px; border-width: 6px; border-radius: 12px; }
-    .btn-grande { font-size: 15px; padding: 10px 16px; }
-    .portada-footer { font-size: 11px; padding-top: 6px; }
-    .portada-logo-peq { width: 32px; right: 12px; bottom: 10px; }
-  }
-  
-  @media (max-height: 480px) and (orientation: landscape) {
-    .portada-card { height: 92vh; padding: 16px 20px 10px; gap: 6px; }
-    .titulo { width: 34%; max-height: 20%; }
-    .portada-imagen { max-height: 100%; }
-    .portada-footer { display: none; }
-  }
+    
+    .portada-bg::before {
+      width: 46vmax;
+      height: 46vmax;
+      top: -18vmax;
+      left: -14vmax;
+    }
+    
+    .portada-bg::after {
+      width: 38vmax;
+      height: 38vmax;
+      bottom: -16vmax;
+      right: -12vmax;
+      background: rgba(255, 255, 255, 0.10);
+    }
+    
+    .portada-overlay {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Tarjeta central: tamaño relativo al viewport, sin scroll interno */
+    .portada-card {
+      width: min(920px, 92vw);
+      height: min(720px, 86vh);
+      background: linear-gradient(180deg, var(--crema) 0%, var(--blanco) 100%);
+      border-radius: 28px;
+      padding: 30px 34px 20px;
+      box-shadow: 0 24px 50px rgba(20, 10, 40, 0.28);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      overflow: hidden;
+    }
+    
+    /* Franja decorativa superior con los 3 colores de marca */
+    .portada-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: linear-gradient(90deg, var(--morado) 0%, var(--teal) 50%, var(--naranja) 100%);
+    }
+    
+    /* Borde interior sutil */
+    .portada-card::after {
+      content: "";
+      position: absolute;
+      inset: 14px 10px 10px;
+      border-radius: 18px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 3px rgba(89, 53, 140, 0.08);
+    }
+    
+    /* Título (imagen). Se controla por tamaño real, sin trucos de
+       "transform: scale" para que no se recorte en pantallas chicas. */
+    .titulo {
+      width: min(520px, 85%);
+      max-height: 55%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin-top: 6px;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+    }
+    
+    /* Área central que ocupa el espacio disponible y contiene la imagen */
+    .portada-media {
+      flex: 1 1 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      box-sizing: border-box;
+      min-height: 0;
+    }
+    
+    /* Imagen central: se ajusta siempre dentro del espacio disponible
+       sin distorsionarse, con un marco de color de marca. */
+    .portada-imagen {
+      max-width: 620px;
+      width: auto;
+      max-height: 100%;
+      height: auto;
+      border-radius: 16px;
+      border: 8px solid var(--blanco);
+      outline: 3px solid var(--teal-suave);
+      box-shadow: var(--sombra-suave);
+      background: var(--blanco);
+      display: block;
+      object-fit: contain;
+    }
+    
+    /* Botones: fijos en su espacio (no colapsan) */
+    .portada-botones {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    
+    /* Footer: fijo y compacto */
+    .portada-footer {
+      flex: 0 0 auto;
+      width: 100%;
+      margin-top: 4px;
+      text-align: center;
+      color: var(--morado-claro);
+      opacity: 0.75;
+      font-size: 13px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(89, 53, 140, 0.12);
+      box-sizing: border-box;
+    }
+    
+    /* Logo pequeño en la esquina inferior derecha de la tarjeta */
+    .portada-logo-peq {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      width: 40px;
+      height: auto;
+      opacity: 0.95;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+    }
+    
+    /* Ajustes responsivos: la tarjeta se mantiene estática y se
+       escala completa para pantallas pequeñas (celular/tablet). */
+    @media (max-width: 920px) {
+      .portada-card {
+        width: 94vw;
+        height: min(640px, 86vh);
+        padding: 24px 20px 16px;
+      }
+      .portada-imagen { max-width: 420px; }
+    }
+    
+    @media (max-width: 540px) {
+      .portada-card {
+        width: 94vw;
+        height: min(620px, 88vh);
+        padding: 20px 16px 14px;
+        gap: 10px;
+      }
+      .titulo { width: 90%; max-height: 26%; }
+      .portada-imagen { max-width: 320px; border-width: 6px; border-radius: 12px; }
+      .btn-grande { font-size: 15px; padding: 10px 16px; }
+      .portada-footer { font-size: 11px; padding-top: 6px; }
+      .portada-logo-peq { width: 32px; right: 12px; bottom: 10px; }
+    }
+    
+    @media (max-height: 480px) and (orientation: landscape) {
+      .portada-card { height: 92vh; padding: 16px 20px 10px; gap: 6px; }
+      .titulo { width: 45%; max-height: 28%; }
+      .portada-imagen { max-height: 100%; }
+      .portada-footer { display: none; }
+    }
   
   /* =============================================================
      BOTONES
